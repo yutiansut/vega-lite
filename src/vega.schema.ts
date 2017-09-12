@@ -52,7 +52,7 @@ export type VgSignalRef = {
   signal: string
 };
 
-export function isVgSignalRef(o: any): o is VgSignalRef  {
+export function isVgSignalRef(o: any): o is VgSignalRef {
   return !!o['signal'];
 }
 
@@ -96,7 +96,7 @@ export function isVgRangeStep(range: VgRange): range is VgRangeStep {
 
 // Domains that are not a union of domains
 export type VgNonUnionDomain = any[] | VgDataRef | VgSignalRef;
-export type VgDomain =  VgNonUnionDomain | DataRefUnionDomain | FieldRefUnionDomain;
+export type VgDomain = VgNonUnionDomain | DataRefUnionDomain | FieldRefUnionDomain;
 
 export type VgMarkGroup = any;
 

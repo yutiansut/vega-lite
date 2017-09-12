@@ -19,7 +19,6 @@ import {
   VgLayout,
   VgLegend,
   VgMarkGroup,
-  VgScale,
   VgSignal,
   VgSignalRef,
   VgTitle,
@@ -316,7 +315,7 @@ export abstract class Model {
         if (layoutHeader[headerType]) {
           for (const header of layoutHeader[headerType]) {
             const headerGroup = getHeaderGroup(this, channel, headerType, layoutHeader, header);
-            if (headerGroup)  {
+            if (headerGroup) {
               headerMarks.push(headerGroup);
             }
           }
@@ -547,16 +546,16 @@ export abstract class Model {
     if (localScaleComponent && !localScaleComponent.merged) {
       return localScaleComponent;
     }
-    return  (this.parent ? this.parent.getScaleComponent(channel) : undefined);
+    return (this.parent ? this.parent.getScaleComponent(channel) : undefined);
   }
 
   /**
    * Traverse a model's hierarchy to get a particular selection component.
    */
-  public getSelectionComponent(varName: string, origName: string): SelectionComponent {
-    let sel = this.component.selection[varName];
+  public getSelectionComponent(vName: string, origName: string): SelectionComponent {
+    let sel = this.component.selection[vName];
     if (!sel && this.parent) {
-      sel = this.parent.getSelectionComponent(varName, origName);
+      sel = this.parent.getSelectionComponent(vName, origName);
     }
     if (!sel) {
       throw new Error(log.message.selectionNotFound(origName));

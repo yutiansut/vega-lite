@@ -372,19 +372,19 @@ export function mergeDomains(domains: VgNonUnionDomain[]): VgDomain {
     return false;
   }) as VgUnionSortField[];
 
-  let sort: VgUnionSortField = true;
+  let unionSort: VgUnionSortField = true;
 
   if (onlySimpleSorts.length === 1) {
-    sort = onlySimpleSorts[0];
+    unionSort = onlySimpleSorts[0];
   } else if (onlySimpleSorts.length > 1) {
     // ignore sort = false if we have another sort property
     const filteredSorts = onlySimpleSorts.filter(s => s !== false);
 
     if (filteredSorts.length > 1) {
       log.warn(log.message.MORE_THAN_ONE_SORT);
-      sort = true;
+      unionSort = true;
     } else {
-      sort = filteredSorts[0];
+      unionSort = filteredSorts[0];
     }
   }
 
@@ -400,13 +400,13 @@ export function mergeDomains(domains: VgNonUnionDomain[]): VgDomain {
     const domain: FieldRefUnionDomain = {
       data: allData[0],
       fields: uniqueDomains.map(d => (d as VgDataRef).field),
-      sort
+      sort: unionSort
     };
 
     return domain;
   }
 
-  return {fields: uniqueDomains, sort};
+  return {fields: uniqueDomains, sort: unionSort};
 }
 
 /**

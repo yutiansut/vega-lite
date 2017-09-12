@@ -318,7 +318,7 @@ function normalizeNonFacetUnit(spec: GenericUnitSpec<Encoding<Field>, AnyMark>, 
     }
 
     const overlayConfig: OverlayConfig = config && config.overlay;
-    const overlayWithLine = overlayConfig  && spec.mark === AREA &&
+    const overlayWithLine = overlayConfig && spec.mark === AREA &&
       contains(['linepoint', 'line'], overlayConfig.area);
     const overlayWithPoint = overlayConfig && (
       (overlayConfig.line && spec.mark === LINE) ||
@@ -408,8 +408,8 @@ function normalizeOverlay(spec: UnitSpec, overlayWithPoint: boolean, overlayWith
 // TODO: add vl.spec.validate & move stuff from vl.validate to here
 
 /* Accumulate non-duplicate fieldDefs in a dictionary */
-function accumulate(dict: any, fieldDefs: FieldDef<Field>[]): any {
-  fieldDefs.forEach(function(fieldDef) {
+function accumulate(dict: any, fDefs: FieldDef<Field>[]): any {
+  fDefs.forEach(fieldDef => {
     // Consider only pure fieldDef properties (ignoring scale, axis, legend)
     const pureFieldDef = ['field', 'type', 'value', 'timeUnit', 'bin', 'aggregate'].reduce((f, key) => {
       if (fieldDef[key] !== undefined) {
@@ -417,8 +417,8 @@ function accumulate(dict: any, fieldDefs: FieldDef<Field>[]): any {
       }
       return f;
     }, {});
-    const key = hash(pureFieldDef);
-    dict[key] = dict[key] || fieldDef;
+    const k = hash(pureFieldDef);
+    dict[k] = dict[k] || fieldDef;
   });
   return dict;
 }

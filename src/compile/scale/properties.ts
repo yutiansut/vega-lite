@@ -57,7 +57,7 @@ function parseUnitScaleProperty(model: UnitModel, property: keyof (Scale | Scale
           mergedScaleCmpt.get('type'),
           mergedScaleCmpt.get('padding'),
           mergedScaleCmpt.get('paddingInner'),
-          specifiedScale.domain,  config.scale);
+          specifiedScale.domain, config.scale);
         if (value !== undefined) {
           localScaleCmpt.set(property, value, false);
         }
@@ -97,7 +97,7 @@ export function parseNonUnitScaleProperty(model: Model, property: keyof (Scale |
   for (const child of model.children) {
     if (property === 'range') {
       parseScaleRange(child);
-    }  else {
+    } else {
       parseScaleProperty(child, property);
     }
   }
@@ -153,8 +153,8 @@ export function padding(channel: Channel, scaleType: ScaleType, scaleConfig: Sca
   return undefined;
 }
 
-export function paddingInner(padding: number, channel: Channel,  scaleConfig: ScaleConfig) {
-  if (padding !== undefined) {
+export function paddingInner(pad: number, channel: Channel, sConfig: ScaleConfig) {
+  if (pad !== undefined) {
     // If user has already manually specified "padding", no need to add default paddingInner.
     return undefined;
   }
@@ -164,13 +164,13 @@ export function paddingInner(padding: number, channel: Channel,  scaleConfig: Sc
     // Basically it doesn't make sense to add padding for color and size.
 
     // paddingOuter would only be called if it's a band scale, just return the default for bandScale.
-    return scaleConfig.bandPaddingInner;
+    return sConfig.bandPaddingInner;
   }
   return undefined;
 }
 
-export function paddingOuter(padding: number, channel: Channel, scaleType: ScaleType, paddingInner: number, scaleConfig: ScaleConfig) {
-  if (padding !== undefined) {
+export function paddingOuter(pad: number, channel: Channel, scaleType: ScaleType, paddInner: number, scaleConfig: ScaleConfig) {
+  if (pad !== undefined) {
     // If user has already manually specified "padding", no need to add default paddingOuter.
     return undefined;
   }
@@ -186,7 +186,7 @@ export function paddingOuter(padding: number, channel: Channel, scaleType: Scale
           size (width/height) = step * (cardinality - paddingInner + 2 * paddingOuter).
           and we want the width/height to be integer by default.
           Note that step (by default) and cardinality are integers.) */
-      return paddingInner / 2;
+      return paddInner / 2;
     }
   }
   return undefined;

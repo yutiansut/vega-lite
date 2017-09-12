@@ -1,5 +1,4 @@
 import {Channel} from './channel';
-import {ScaleComponentProps} from './compile/scale/component';
 import {DateTime} from './datetime';
 import * as log from './log';
 import {contains, Flag, flagKeys, keys, toSet} from './util';
@@ -13,7 +12,7 @@ export namespace ScaleType {
   export const SQRT: 'sqrt' = 'sqrt';
   // Continuous - Time
   export const TIME: 'time' = 'time';
-  export const UTC: 'utc'  = 'utc';
+  export const UTC: 'utc' = 'utc';
   // sequential
   export const SEQUENTIAL: 'sequential' = 'sequential';
 
@@ -125,12 +124,12 @@ export function isBinScale(type: ScaleType): type is 'bin-linear' | 'bin-ordinal
 }
 
 export function hasContinuousDomain(type: ScaleType):
-  type is 'linear' | 'log' | 'pow' | 'sqrt' |  'time' | 'utc'|
+  type is 'linear' | 'log' | 'pow' | 'sqrt' | 'time' | 'utc'|
           'sequential' /* TODO add | 'quantile' | 'quantize' | 'threshold' */ {
   return type in CONTINUOUS_DOMAIN_INDEX;
 }
 
-export function isContinuousToContinuous(type: ScaleType): type is 'linear' | 'bin-linear' | 'log' | 'pow' | 'sqrt' |  'time' | 'utc' {
+export function isContinuousToContinuous(type: ScaleType): type is 'linear' | 'bin-linear' | 'log' | 'pow' | 'sqrt' | 'time' | 'utc' {
   return type in CONTINUOUS_TO_CONTINUOUS_INDEX;
 }
 
@@ -576,7 +575,7 @@ const SCALE_PROPERTY_INDEX: Flag<keyof Scale> = {
 
 export const SCALE_PROPERTIES = flagKeys(SCALE_PROPERTY_INDEX);
 
-const {type, domain, range, rangeStep, scheme, ...NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTY_INDEX} =  SCALE_PROPERTY_INDEX;
+const {type: _t, domain: _d, range: _r, rangeStep: _rs, scheme: _s, ...NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTY_INDEX} = SCALE_PROPERTY_INDEX;
 
 export const NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTIES = flagKeys(NON_TYPE_DOMAIN_RANGE_VEGA_SCALE_PROPERTY_INDEX);
 

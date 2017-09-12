@@ -87,8 +87,8 @@ export type RepeatRef = {
 
 export type Field = string | RepeatRef;
 
-export function isRepeatRef(field: Field): field is RepeatRef {
-  return field && !isString(field) && 'repeat' in field;
+export function isRepeatRef(f: Field): f is RepeatRef {
+  return f && !isString(f) && 'repeat' in f;
 }
 
 /** @hide */
@@ -265,12 +265,12 @@ export interface FieldRefOption {
 }
 
 export function field(fieldDef: FieldDefBase<string>, opt: FieldRefOption = {}): string {
-  let field = fieldDef.field;
+  let f = fieldDef.field;
   const prefix = opt.prefix;
   let suffix = opt.suffix;
 
   if (isCount(fieldDef)) {
-    field = 'count_*';
+    f = 'count_*';
   } else {
     let fn: string = undefined;
 
@@ -286,23 +286,23 @@ export function field(fieldDef: FieldDefBase<string>, opt: FieldRefOption = {}):
     }
 
     if (fn) {
-      field = `${fn}_${field}`;
+      f = `${fn}_${f}`;
     }
   }
 
   if (suffix) {
-    field = `${field}_${suffix}`;
+    f = `${f}_${suffix}`;
   }
 
   if (prefix) {
-    field = `${prefix}_${field}`;
+    f = `${prefix}_${f}`;
   }
 
   if (opt.expr) {
-    field = `${opt.expr}[${stringValue(field)}]`;
+    f = `${opt.expr}[${stringValue(f)}]`;
   }
 
-  return field;
+  return f;
 }
 
 export function isDiscrete(fieldDef: FieldDef<Field>) {

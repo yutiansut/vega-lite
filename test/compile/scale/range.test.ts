@@ -146,7 +146,7 @@ describe('compile/scale', () => {
 
       it('should use default ordinal range in Vega for an ordinal color field.', () => {
         assert.deepEqual(
-          parseRangeForChannel('color', 'ordinal', ORDINAL, {}, defaultConfig,  undefined, 'point', undefined, 'plot_width', []).value,
+          parseRangeForChannel('color', 'ordinal', ORDINAL, {}, defaultConfig, undefined, 'point', undefined, 'plot_width', []).value,
           'ordinal'
         );
       });
@@ -264,7 +264,7 @@ describe('compile/scale', () => {
         it('should return [9, (minBandSize-2)^2] if both x and y are discrete and size is not quantitative (thus use zero=false, by default)', () => {
           for (const m of ['point', 'square', 'circle'] as Mark[]) {
             assert.deepEqual(
-              parseRangeForChannel('size', 'linear', QUANTITATIVE, {}, defaultConfig,  false, m, undefined, 'plot_width',
+              parseRangeForChannel('size', 'linear', QUANTITATIVE, {}, defaultConfig, false, m, undefined, 'plot_width',
                 [11, 13] // xyRangeSteps
               ).value,
               [9, 81]

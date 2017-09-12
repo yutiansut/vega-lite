@@ -57,7 +57,7 @@ export namespace TimeUnit {
 
 export type LocalSingleTimeUnit =
   typeof TimeUnit.YEAR |
-  typeof TimeUnit.QUARTER  |
+  typeof TimeUnit.QUARTER |
   typeof TimeUnit.MONTH |
   typeof TimeUnit.DAY |
   typeof TimeUnit.DATE |
@@ -248,9 +248,10 @@ export function convert(unit: TimeUnit, date: Date): Date {
           result[setDateMethod]((Math.floor(date[getDateMethod]() / 3)) * 3);
           break;
         }
-        default:
+        default: {
           const {getDateMethod, setDateMethod} = dateMethods(timeUnitPart, isUTC);
           result[setDateMethod](date[getDateMethod]());
+        }
       }
     }
   });
@@ -279,7 +280,7 @@ export function containsTimeUnit(fullTimeUnit: TimeUnit, timeUnit: TimeUnit) {
  * Returns Vega expresssion for a given timeUnit and fieldRef
  */
 export function fieldExpr(fullTimeUnit: TimeUnit, field: string): string {
-  const fieldRef =  `datum[${stringValue(field)}]`;
+  const fieldRef = `datum[${stringValue(field)}]`;
 
   const utc = isUTCTimeUnit(fullTimeUnit) ? 'utc' : '';
   function func(timeUnit: TimeUnit) {

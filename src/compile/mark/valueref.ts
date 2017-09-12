@@ -53,14 +53,14 @@ export function stackable2(channel: 'x2' | 'y2', aFieldDef: ChannelDef<string>, 
 /**
  * Value Ref for binned fields
  */
-export function bin(fieldDef: FieldDef<string>, scaleName: string, side: 'start' | 'end',  offset?: number) {
+export function bin(fieldDef: FieldDef<string>, scaleName: string, side: 'start' | 'end', offset?: number) {
   const binSuffix = side === 'start' ? undefined : 'end';
   return fieldRef(fieldDef, scaleName, {binSuffix}, offset ? {offset} : {});
 }
 
 export function fieldRef(
     fieldDef: FieldDef<string>, scaleName: string, opt: FieldRefOption,
-    mixins?: {offset?: number | VgValueRef, band?: number|boolean}
+    mixins?: {offset?: number | VgValueRef, band?: number | boolean}
   ): VgValueRef {
   const ref: VgValueRef = {
     scale: scaleName,
@@ -75,10 +75,10 @@ export function fieldRef(
   return ref;
 }
 
-export function band(scaleName: string, band: number|boolean = true): VgValueRef {
+export function band(scaleName: string, b: number | boolean = true): VgValueRef {
   return {
     scale: scaleName,
-    band: band
+    band: b
   };
 }
 

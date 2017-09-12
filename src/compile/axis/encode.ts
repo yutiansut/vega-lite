@@ -25,7 +25,7 @@ export function labels(model: UnitModel, channel: SpatialScaleChannel, specified
   if (isTimeFieldDef(fieldDef)) {
     const isUTCScale = model.getScaleComponent(channel).get('type') === ScaleType.UTC;
 
-    labelsSpec.text =  {
+    labelsSpec.text = {
       signal: timeFormatExpression('datum.value', fieldDef.timeUnit, axis.format, config.axis.shortTimeLabels, config.timeFormat, isUTCScale)
     };
   }
@@ -61,7 +61,7 @@ export function labelAngle(axis: Axis, channel: Channel, fieldDef: FieldDef<stri
     return ((axis.labelAngle % 360) + 360) % 360;
   } else {
     // auto rotate for X
-    if (channel === X && (contains([NOMINAL, ORDINAL], fieldDef.type) || !!fieldDef.bin ||  isTimeFieldDef(fieldDef))) {
+    if (channel === X && (contains([NOMINAL, ORDINAL], fieldDef.type) || !!fieldDef.bin || isTimeFieldDef(fieldDef))) {
       return 270;
     }
   }
@@ -71,7 +71,7 @@ export function labelAlign(angle: number, orient: AxisOrient) {
   if (angle && angle > 0) {
     if (angle > 180) {
       return orient === 'top' ? 'left' : 'right';
-    }  else if (angle < 180) {
+    } else if (angle < 180) {
       return orient === 'top' ? 'right': 'left';
     }
   }

@@ -1,10 +1,22 @@
 import {AxisConfigMixins} from './axis';
 import {COMPOSITE_MARK_STYLES} from './compositemark';
-import {CompositeMarkConfigMixins, CompositeMarkStyle, VL_ONLY_COMPOSITE_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX} from './compositemark/index';
+import {
+  CompositeMarkConfigMixins,
+  CompositeMarkStyle,
+  VL_ONLY_COMPOSITE_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX,
+} from './compositemark/index';
 import {VL_ONLY_GUIDE_CONFIG} from './guide';
 import {defaultLegendConfig, LegendConfig} from './legend';
-import {Mark, MarkConfigMixins, PRIMITIVE_MARKS, VL_ONLY_MARK_CONFIG_PROPERTIES, VL_ONLY_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX} from './mark';
-import * as mark from './mark';
+import {
+  defaultBarConfig,
+  defaultMarkConfig,
+  defaultTickConfig,
+  Mark,
+  MarkConfigMixins,
+  PRIMITIVE_MARKS,
+  VL_ONLY_MARK_CONFIG_PROPERTIES,
+  VL_ONLY_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX,
+} from './mark';
 import {defaultScaleConfig, ScaleConfig} from './scale';
 import {defaultConfig as defaultSelectionConfig, SelectionConfig} from './selection';
 import {StackOffset} from './stack';
@@ -235,9 +247,9 @@ export const defaultConfig: Config = {
 
   view: defaultViewConfig,
 
-  mark: mark.defaultMarkConfig,
+  mark: defaultMarkConfig,
   area: {},
-  bar: mark.defaultBarConfig,
+  bar: defaultBarConfig,
   circle: {},
   line: {},
   point: {},
@@ -245,7 +257,7 @@ export const defaultConfig: Config = {
   rule: {color: 'black'}, // Need this to override default color in mark config
   square: {},
   text: {color: 'black'}, // Need this to override default color in mark config
-  tick: mark.defaultTickConfig,
+  tick: defaultTickConfig,
 
   box: {size: 14},
   boxWhisker: {},

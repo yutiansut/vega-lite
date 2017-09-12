@@ -101,23 +101,23 @@ function base(iter: number, sel: any, opts: any = {}): UnitSpec | LayerSpec {
 }
 
 export function spec(compose: ComposeType, iter: number, sel: any, opts: any = {}): TopLevelExtendedSpec {
-  const {data, ...spec} = base(iter, sel, opts);
+  const {data, ...specWithoutData} = base(iter, sel, opts);
   const resolve = opts.resolve;
   switch (compose) {
     case 'unit':
-      return {data, ...spec};
+      return {data, ...specWithoutData};
     case 'facet':
       return {
         data,
         facet: {row: {field: 'c', type: 'nominal'}},
-        spec,
+        spec: specWithoutData,
         resolve
       };
     case 'repeat':
       return {
         data,
         repeat: {row: ['d', 'e', 'f']},
-        spec,
+        spec: specWithoutData,
         resolve
       };
   }
@@ -146,8 +146,8 @@ export function pt(key: string, idx: number, parent?: string) {
 }
 
 export function embedFn(browser: WebdriverIO.Client<void>) {
-  return function(spec: TopLevelExtendedSpec) {
-    browser.execute((_) => window['embed'](_), spec);
+  return function(topLevelSpec: TopLevelExtendedSpec) {
+    browser.execute((_) => window['embed'](_), topLevelSpec);
   };
 }
 

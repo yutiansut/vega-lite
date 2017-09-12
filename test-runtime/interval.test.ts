@@ -74,8 +74,8 @@ describe('interval selections at runtime in unit views', function() {
       testRender(`bins_${i}`);
     }
 
-    const store = browser.execute(brush('bins_clear', 0)).value;
-    assert.lengthOf(store, 0);
+    const store2 = browser.execute(brush('bins_clear', 0)).value;
+    assert.lengthOf(store2, 0);
   });
 
   it('should brush over ordinal/nominal domains', function() {
@@ -94,8 +94,8 @@ describe('interval selections at runtime in unit views', function() {
       testRender(`ord_${i}`);
     }
 
-    const store = browser.execute(brush('drag_clear', 0)).value;
-    assert.lengthOf(store, 0);
+    const store2 = browser.execute(brush('drag_clear', 0)).value;
+    assert.lengthOf(store2, 0);
   });
 
   it('should brush over temporal domains', function() {
