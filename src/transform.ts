@@ -4,6 +4,7 @@ import {Data} from './data';
 import {LogicalOperand, normalizeLogicalOperand} from './logical';
 import {normalizePredicate, Predicate} from './predicate';
 import {TimeUnit} from './timeunit';
+import {WindowOnlyOp} from './window';
 
 
 export interface FilterTransform {
@@ -101,6 +102,59 @@ export interface AggregatedFieldDef {
   as: string;
 }
 
+export interface WindowFieldDef {
+  /**
+   * The operations supported for the window aggregation. See the list of supported operations here:
+   *   https://vega.github.io/vega/docs/transforms/window/#ops
+   */
+  op: AggregateOp | WindowOnlyOp;
+
+  /**
+   * The optional parameters for the operation. For example the window operator (nth_value)
+   * takes a parameter N and returns the nth value in the current frame.
+   */
+  param?: number;
+
+  /**
+   * The field that will be used in the operation, some operations
+   * do not require fields.
+   */
+  field?: string;
+
+  /**
+   * The name for the new field in the window transform.
+   */
+  as?: string;
+}
+
+export interface WindowTransform {
+  /**
+   * Array of objects that summarize the fields that will be aggregated over the window.
+   */
+  window: WindowFieldDef[];
+
+  /**
+   * The frame for the window, if none is set the default is `[null, 0]` everything before the
+   * current item.
+   */
+  frame?: (null | number)[];
+
+  /**
+   * Whether to ignoreThePeers during the comparison in the window.
+   */
+  ignorePeers?: boolean;
+
+  /**
+   * The fields to group by.
+   */
+  groupby?: string[];
+
+  /**
+   * The comparator to use to determine the window.
+   */
+  sort?: Comparator;
+}
+
 export interface LookupData {
   /**
    * Secondary data source to lookup in.
@@ -143,8 +197,28 @@ export interface LookupTransform {
   default?: string;
 }
 
+
+/**
+ * A comparator fields
+ */
+export interface ComparatorField {
+  field: string;
+  order?: ('ascending' | 'descending');
+}
+
+export interface Comparator {
+  /**
+   * The field that will be compared
+   */
+  compare: ComparatorField[];
+}
+
 export function isLookup(t: Transform): t is LookupTransform {
   return t['lookup'] !== undefined;
+}
+
+export function isWindow(t: Transform): t is WindowTransform {
+  return t['window'] !== undefined;
 }
 
 export function isCalculate(t: Transform): t is CalculateTransform {
@@ -163,7 +237,7 @@ export function isAggregate(t: Transform): t is AggregateTransform {
   return t['aggregate'] !== undefined;
 }
 
-export type Transform = FilterTransform | CalculateTransform | LookupTransform | BinTransform | TimeUnitTransform | AggregateTransform;
+export type Transform = FilterTransform | CalculateTransform | LookupTransform | BinTransform | TimeUnitTransform | AggregateTransform | WindowTransform;
 
 export function normalizeTransform(transform: Transform[]) {
   return transform.map(t => {

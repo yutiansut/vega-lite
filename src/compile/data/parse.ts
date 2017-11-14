@@ -3,7 +3,7 @@ import {MAIN, RAW} from '../../data';
 import {DateTime, isDateTime} from '../../datetime';
 import * as log from '../../log';
 import {isFieldEqualPredicate, isFieldOneOfPredicate, isFieldRangePredicate} from '../../predicate';
-import {isAggregate, isBin, isCalculate, isFilter, isLookup, isTimeUnit} from '../../transform';
+import {isAggregate, isBin, isCalculate, isFilter, isLookup, isTimeUnit, isWindow} from '../../transform';
 import {Dict, keys} from '../../util';
 import {isFacetModel, isLayerModel, isUnitModel, Model} from '../model';
 import {requiresSelectionId} from '../selection/selection';
@@ -23,6 +23,7 @@ import {LookupNode} from './lookup';
 import {SourceNode} from './source';
 import {StackNode} from './stack';
 import {TimeUnitNode} from './timeunit';
+import {WindowTransformNode} from './window';
 
 function parseRoot(model: Model, sources: Dict<SourceNode>): DataFlowNode {
   if (model.data || !model.parent) {
@@ -115,6 +116,8 @@ export function parseTransformArray(model: Model) {
       }
     } else if (isLookup(t)) {
       node = LookupNode.make(model, t, lookupCounter++);
+    } else if (isWindow(t)) {
+      node = new WindowTransformNode(t);
     } else {
       log.warn(log.message.invalidTransformIgnored(t));
       return;
