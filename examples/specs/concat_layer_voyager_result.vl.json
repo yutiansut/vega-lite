@@ -1,0 +1,405 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "data": {
+    "values": [
+      {
+        "measure": "Open Exploration",
+        "mean": 1.813,
+        "lo": 1.255,
+        "hi": 2.370,
+        "study": "PoleStar vs Voyager"
+      },
+      {
+        "measure": "Focused Question Answering",
+        "mean": -1.688,
+        "lo": -2.325,
+        "hi": -1.050,
+        "study": "PoleStar vs Voyager"
+      },
+      {
+        "measure": "Open Exploration",
+        "mean": 2.1875,
+        "lo": 1.665,
+        "hi": 2.710,
+        "study": "PoleStar vs Voyager 2"
+      },
+      {
+        "measure": "Focused Question Answering",
+        "mean": -0.0625,
+        "lo": -0.474,
+        "hi": 0.349,
+        "study": "PoleStar vs Voyager 2"
+      }
+    ]
+  },
+  "hconcat": [
+    {
+      "vconcat": [
+        {
+          "title": "Mean of Subject Ratings (95% CIs)",
+          "layer": [
+            {
+              "mark": "rule",
+              "encoding": {
+                "x": {
+                  "field": "lo",
+                  "type": "quantitative",
+                  "scale": {
+                    "zero": false
+                  },
+                  "axis": {
+                    "orient": "bottom",
+                    "title": "",
+                    "encoding": {
+                      "grid": {
+                        "strokeDash": {
+                          "value": [
+                            3,
+                            3
+                          ]
+                        },
+                        "stroke": {
+                          "condition": {
+                            "test": "datum.value === 0",
+                            "value": "#666"
+                          },
+                          "value": "#CCC"
+                        }
+                      }
+                    }
+                  }
+                },
+                "x2": {
+                  "field": "hi",
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "study",
+                  "type": "nominal",
+                  "axis": {
+                    "title": null,
+                    "labelPadding": 5,
+                    "domain": false,
+                    "ticks": false,
+                    "grid": false
+                  }
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "circle",
+                "style": "measure"
+              },
+              "encoding": {
+                "x": {
+                  "field": "mean",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      -3,
+                      3
+                    ]
+                  }
+                },
+                "y": {
+                  "field": "study",
+                  "type": "nominal"
+                },
+                "color": {
+                  "field": "measure",
+                  "type": "nominal",
+                  "scale": {
+                    "range": [
+                      "black",
+                      "white"
+                    ]
+                  },
+                  "legend": null
+                },
+                "opacity": {
+                  "value": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "from": -0.25,
+                "to": -2.9,
+                "label": "PoleStar"
+              },
+              {
+                "from": 0.25,
+                "to": 2.9,
+                "label": "Voyager / Voyager 2"
+              }
+            ]
+          },
+          "layer": [
+            {
+              "mark": "rule",
+              "encoding": {
+                "x": {
+                  "field": "from",
+                  "type": "quantitative",
+                  "scale": {
+                    "zero": false
+                  },
+                  "axis": null
+                },
+                "x2": {
+                  "field": "to",
+                  "type": "quantitative"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 60,
+                "fill": "black"
+              },
+              "encoding": {
+                "x": {
+                  "field": "to",
+                  "type": "quantitative",
+                  "axis": null
+                },
+                "shape": {
+                  "condition": {
+                    "test": "datum.to > 0",
+                    "value": "triangle-right"
+                  },
+                  "value": "triangle-left"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "right",
+                "style": "arrow-label"
+              },
+              "transform": [
+                {
+                  "filter": "datum.label === 'PoleStar'"
+                }
+              ],
+              "encoding": {
+                "x": {
+                  "field": "from",
+                  "type": "quantitative",
+                  "axis": null
+                },
+                "text": {
+                  "field": "label",
+                  "type": "nominal"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "style": "arrow-label"
+              },
+              "transform": [
+                {
+                  "filter": "datum.label !== 'PoleStar'"
+                }
+              ],
+              "encoding": {
+                "x": {
+                  "field": "from",
+                  "type": "quantitative",
+                  "axis": null
+                },
+                "text": {
+                  "field": "label",
+                  "type": "nominal"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "right",
+                "style": "arrow-label2"
+              },
+              "transform": [
+                {
+                  "filter": "datum.label === 'PoleStar'"
+                }
+              ],
+              "encoding": {
+                "x": {
+                  "field": "from",
+                  "type": "quantitative",
+                  "axis": null
+                },
+                "text": {
+                  "value": "more valuable"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "style": "arrow-label2"
+              },
+              "transform": [
+                {
+                  "filter": "datum.label !== 'PoleStar'"
+                }
+              ],
+              "encoding": {
+                "x": {
+                  "field": "from",
+                  "type": "quantitative",
+                  "axis": null
+                },
+                "text": {
+                  "value": "more valuable"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "measure": "Open Exploration",
+            "summary": "Voyager and Voyager 2 are both favored over PoleStar.",
+            "summary2": ""
+          },
+          {
+            "measure": "Focused Question Answering",
+            "summary": "Voyager is less preferrable than PoleStar but",
+            "summary2": "Voyager 2 is rated comparably with Polestar."
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "style": "measure"
+          },
+          "encoding": {
+            "y": {
+              "field": "measure",
+              "type": "nominal",
+              "axis": null
+            },
+            "color": {
+              "field": "measure",
+              "type": "nominal",
+              "legend": null
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "baseline": "middle",
+            "align": "left",
+            "fontWeight": "bold",
+            "dx": -22
+          },
+          "encoding": {
+            "y": {
+              "field": "measure",
+              "type": "nominal",
+              "scale": {
+                "rangeStep": 40,
+                "reverse": true
+              },
+              "axis": null
+            },
+            "text": {
+              "field": "measure",
+              "type": "nominal"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "baseline": "middle",
+            "align": "left",
+            "dx": -22,
+            "dy": 16
+          },
+          "encoding": {
+            "y": {
+              "field": "measure",
+              "type": "nominal",
+              "scale": {
+                "rangeStep": 40
+              },
+              "axis": null
+            },
+            "text": {
+              "field": "summary",
+              "type": "nominal"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "baseline": "middle",
+            "align": "left",
+            "dx": -22,
+            "dy": 30
+          },
+          "encoding": {
+            "y": {
+              "field": "measure",
+              "type": "nominal",
+              "scale": {
+                "rangeStep": 40
+              },
+              "axis": null
+            },
+            "text": {
+              "field": "summary2",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "style": {
+      "measure": {
+        "stroke": "black",
+        "opacity": 1
+      },
+      "arrow-label": {
+        "dy": 16,
+        "fontSize": 9.5
+      },
+      "arrow-label2": {
+        "dy": 28,
+        "fontSize": 9.5
+      }
+    },
+    "title": {
+      "fontSize": 12
+    }
+  }
+}

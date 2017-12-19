@@ -1,0 +1,954 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+    "autosize": "pad",
+    "padding": 5,
+    "data": [
+        {
+            "name": "source_0",
+            "values": [
+                {
+                    "measure": "Open Exploration",
+                    "summary": "Voyager and Voyager 2 are both favored over PoleStar.",
+                    "summary2": ""
+                },
+                {
+                    "measure": "Focused Question Answering",
+                    "summary": "Voyager is less preferrable than PoleStar but",
+                    "summary2": "Voyager 2 is rated comparably with Polestar."
+                }
+            ]
+        },
+        {
+            "name": "source_2",
+            "values": [
+                {
+                    "from": -0.25,
+                    "to": -2.9,
+                    "label": "PoleStar"
+                },
+                {
+                    "from": 0.25,
+                    "to": 2.9,
+                    "label": "Voyager / Voyager 2"
+                }
+            ]
+        },
+        {
+            "name": "source_1",
+            "values": [
+                {
+                    "measure": "Open Exploration",
+                    "mean": 1.813,
+                    "lo": 1.255,
+                    "hi": 2.37,
+                    "study": "PoleStar vs Voyager"
+                },
+                {
+                    "measure": "Focused Question Answering",
+                    "mean": -1.688,
+                    "lo": -2.325,
+                    "hi": -1.05,
+                    "study": "PoleStar vs Voyager"
+                },
+                {
+                    "measure": "Open Exploration",
+                    "mean": 2.1875,
+                    "lo": 1.665,
+                    "hi": 2.71,
+                    "study": "PoleStar vs Voyager 2"
+                },
+                {
+                    "measure": "Focused Question Answering",
+                    "mean": -0.0625,
+                    "lo": -0.474,
+                    "hi": 0.349,
+                    "study": "PoleStar vs Voyager 2"
+                }
+            ]
+        },
+        {
+            "name": "data_3",
+            "source": "source_1",
+            "transform": [
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"mean\"])",
+                    "as": "mean"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"mean\"] !== null && !isNaN(datum[\"mean\"])"
+                }
+            ]
+        },
+        {
+            "name": "data_10",
+            "source": "source_2",
+            "transform": [
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"from\"])",
+                    "as": "from"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum.label !== 'PoleStar'"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"from\"] !== null && !isNaN(datum[\"from\"])"
+                }
+            ]
+        },
+        {
+            "name": "data_2",
+            "source": "source_1",
+            "transform": [
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"lo\"])",
+                    "as": "lo"
+                },
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"hi\"])",
+                    "as": "hi"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"lo\"] !== null && !isNaN(datum[\"lo\"])"
+                }
+            ]
+        },
+        {
+            "name": "data_6",
+            "source": "source_2",
+            "transform": [
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"to\"])",
+                    "as": "to"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"to\"] !== null && !isNaN(datum[\"to\"])"
+                }
+            ]
+        },
+        {
+            "name": "data_7",
+            "source": "source_2",
+            "transform": [
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"from\"])",
+                    "as": "from"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum.label === 'PoleStar'"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"from\"] !== null && !isNaN(datum[\"from\"])"
+                }
+            ]
+        },
+        {
+            "name": "data_8",
+            "source": "source_2",
+            "transform": [
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"from\"])",
+                    "as": "from"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum.label !== 'PoleStar'"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"from\"] !== null && !isNaN(datum[\"from\"])"
+                }
+            ]
+        },
+        {
+            "name": "data_9",
+            "source": "source_2",
+            "transform": [
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"from\"])",
+                    "as": "from"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum.label === 'PoleStar'"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"from\"] !== null && !isNaN(datum[\"from\"])"
+                }
+            ]
+        },
+        {
+            "name": "data_5",
+            "source": "source_2",
+            "transform": [
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"from\"])",
+                    "as": "from"
+                },
+                {
+                    "type": "formula",
+                    "expr": "toNumber(datum[\"to\"])",
+                    "as": "to"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum[\"from\"] !== null && !isNaN(datum[\"from\"])"
+                }
+            ]
+        }
+    ],
+    "signals": [
+        {
+            "name": "concat_0_width",
+            "value": 200
+        },
+        {
+            "name": "concat_0_concat_0_y_step",
+            "value": 21
+        },
+        {
+            "name": "concat_0_concat_0_height",
+            "update": "bandspace(domain('concat_0_concat_0_y').length, 1, 0.5) * concat_0_concat_0_y_step"
+        },
+        {
+            "name": "concat_0_concat_1_height",
+            "value": 21
+        },
+        {
+            "name": "concat_1_width",
+            "value": 21
+        },
+        {
+            "name": "concat_1_y_step",
+            "value": 40
+        },
+        {
+            "name": "concat_1_height",
+            "update": "bandspace(domain('concat_1_y').length, 1, 0.5) * concat_1_y_step"
+        }
+    ],
+    "layout": {
+        "padding": {
+            "row": 10,
+            "column": 10
+        },
+        "offset": 10,
+        "bounds": "full",
+        "align": "each"
+    },
+    "marks": [
+        {
+            "type": "group",
+            "name": "concat_0_group",
+            "layout": {
+                "padding": {
+                    "row": 10,
+                    "column": 10
+                },
+                "offset": 10,
+                "columns": 1,
+                "bounds": "full",
+                "align": "each"
+            },
+            "marks": [
+                {
+                    "type": "group",
+                    "name": "concat_0_concat_0_group",
+                    "title": {
+                        "text": "Mean of Subject Ratings (95% CIs)"
+                    },
+                    "style": "cell",
+                    "encode": {
+                        "update": {
+                            "width": {
+                                "signal": "concat_0_width"
+                            },
+                            "height": {
+                                "signal": "concat_0_concat_0_height"
+                            }
+                        }
+                    },
+                    "marks": [
+                        {
+                            "name": "concat_0_concat_0_layer_0_marks",
+                            "type": "rule",
+                            "style": [
+                                "rule"
+                            ],
+                            "from": {
+                                "data": "data_2"
+                            },
+                            "encode": {
+                                "update": {
+                                    "stroke": {
+                                        "value": "black"
+                                    },
+                                    "x": {
+                                        "scale": "concat_0_concat_0_x",
+                                        "field": "lo"
+                                    },
+                                    "y": {
+                                        "scale": "concat_0_concat_0_y",
+                                        "field": "study"
+                                    },
+                                    "x2": {
+                                        "scale": "concat_0_concat_0_x",
+                                        "field": "hi"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "concat_0_concat_0_layer_1_marks",
+                            "type": "symbol",
+                            "style": [
+                                "circle",
+                                "measure"
+                            ],
+                            "from": {
+                                "data": "data_3"
+                            },
+                            "encode": {
+                                "update": {
+                                    "fill": {
+                                        "scale": "color",
+                                        "field": "measure"
+                                    },
+                                    "opacity": {
+                                        "value": 1
+                                    },
+                                    "x": {
+                                        "scale": "concat_0_concat_0_x",
+                                        "field": "mean"
+                                    },
+                                    "y": {
+                                        "scale": "concat_0_concat_0_y",
+                                        "field": "study"
+                                    },
+                                    "shape": {
+                                        "value": "circle"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "axes": [
+                        {
+                            "orient": "bottom",
+                            "title": "",
+                            "scale": "concat_0_concat_0_x",
+                            "labelFlush": true,
+                            "labelOverlap": true,
+                            "tickCount": {
+                                "signal": "ceil(concat_0_width/40)"
+                            },
+                            "zindex": 1
+                        },
+                        {
+                            "orient": "bottom",
+                            "encode": {
+                                "grid": {
+                                    "update": {
+                                        "strokeDash": {
+                                            "value": [
+                                                3,
+                                                3
+                                            ]
+                                        },
+                                        "stroke": [
+                                            {
+                                                "test": "datum.value === 0",
+                                                "value": "#666"
+                                            },
+                                            {
+                                                "condition": {
+                                                    "test": "datum.value === 0",
+                                                    "value": "#666"
+                                                },
+                                                "value": "#CCC"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "scale": "concat_0_concat_0_x",
+                            "domain": false,
+                            "grid": true,
+                            "labels": false,
+                            "maxExtent": 0,
+                            "minExtent": 0,
+                            "tickCount": {
+                                "signal": "ceil(concat_0_width/40)"
+                            },
+                            "ticks": false,
+                            "zindex": 0,
+                            "gridScale": "concat_0_concat_0_y"
+                        },
+                        {
+                            "domain": false,
+                            "labelPadding": 5,
+                            "ticks": false,
+                            "title": null,
+                            "scale": "concat_0_concat_0_y",
+                            "orient": "left",
+                            "zindex": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "group",
+                    "name": "concat_0_concat_1_group",
+                    "style": "cell",
+                    "encode": {
+                        "update": {
+                            "width": {
+                                "signal": "concat_0_width"
+                            },
+                            "height": {
+                                "signal": "concat_0_concat_1_height"
+                            }
+                        }
+                    },
+                    "marks": [
+                        {
+                            "name": "concat_0_concat_1_layer_0_marks",
+                            "type": "rule",
+                            "style": [
+                                "rule"
+                            ],
+                            "from": {
+                                "data": "data_5"
+                            },
+                            "encode": {
+                                "update": {
+                                    "stroke": {
+                                        "value": "black"
+                                    },
+                                    "x": {
+                                        "scale": "concat_0_concat_1_x",
+                                        "field": "from"
+                                    },
+                                    "y": {
+                                        "signal": "concat_0_concat_1_height",
+                                        "mult": 0.5
+                                    },
+                                    "x2": {
+                                        "scale": "concat_0_concat_1_x",
+                                        "field": "to"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "concat_0_concat_1_layer_1_marks",
+                            "type": "symbol",
+                            "style": [
+                                "point"
+                            ],
+                            "from": {
+                                "data": "data_6"
+                            },
+                            "encode": {
+                                "update": {
+                                    "opacity": {
+                                        "value": 0.7
+                                    },
+                                    "fill": {
+                                        "value": "black"
+                                    },
+                                    "size": {
+                                        "value": 60
+                                    },
+                                    "x": {
+                                        "scale": "concat_0_concat_1_x",
+                                        "field": "to"
+                                    },
+                                    "y": {
+                                        "signal": "concat_0_concat_1_height",
+                                        "mult": 0.5
+                                    },
+                                    "shape": [
+                                        {
+                                            "test": "datum.to > 0",
+                                            "value": "triangle-right"
+                                        },
+                                        {
+                                            "value": "triangle-left"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "concat_0_concat_1_layer_2_marks",
+                            "type": "text",
+                            "style": [
+                                "text",
+                                "arrow-label"
+                            ],
+                            "from": {
+                                "data": "data_7"
+                            },
+                            "encode": {
+                                "update": {
+                                    "align": {
+                                        "value": "right"
+                                    },
+                                    "fill": {
+                                        "value": "black"
+                                    },
+                                    "x": {
+                                        "scale": "concat_0_concat_1_x",
+                                        "field": "from"
+                                    },
+                                    "y": {
+                                        "signal": "concat_0_concat_1_height",
+                                        "mult": 0.5
+                                    },
+                                    "text": {
+                                        "signal": "''+datum[\"label\"]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "concat_0_concat_1_layer_3_marks",
+                            "type": "text",
+                            "style": [
+                                "text",
+                                "arrow-label"
+                            ],
+                            "from": {
+                                "data": "data_8"
+                            },
+                            "encode": {
+                                "update": {
+                                    "align": {
+                                        "value": "left"
+                                    },
+                                    "fill": {
+                                        "value": "black"
+                                    },
+                                    "x": {
+                                        "scale": "concat_0_concat_1_x",
+                                        "field": "from"
+                                    },
+                                    "y": {
+                                        "signal": "concat_0_concat_1_height",
+                                        "mult": 0.5
+                                    },
+                                    "text": {
+                                        "signal": "''+datum[\"label\"]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "concat_0_concat_1_layer_4_marks",
+                            "type": "text",
+                            "style": [
+                                "text",
+                                "arrow-label2"
+                            ],
+                            "from": {
+                                "data": "data_9"
+                            },
+                            "encode": {
+                                "update": {
+                                    "align": {
+                                        "value": "right"
+                                    },
+                                    "fill": {
+                                        "value": "black"
+                                    },
+                                    "x": {
+                                        "scale": "concat_0_concat_1_x",
+                                        "field": "from"
+                                    },
+                                    "y": {
+                                        "signal": "concat_0_concat_1_height",
+                                        "mult": 0.5
+                                    },
+                                    "text": {
+                                        "value": "more valuable"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "concat_0_concat_1_layer_5_marks",
+                            "type": "text",
+                            "style": [
+                                "text",
+                                "arrow-label2"
+                            ],
+                            "from": {
+                                "data": "data_10"
+                            },
+                            "encode": {
+                                "update": {
+                                    "align": {
+                                        "value": "left"
+                                    },
+                                    "fill": {
+                                        "value": "black"
+                                    },
+                                    "x": {
+                                        "scale": "concat_0_concat_1_x",
+                                        "field": "from"
+                                    },
+                                    "y": {
+                                        "signal": "concat_0_concat_1_height",
+                                        "mult": 0.5
+                                    },
+                                    "text": {
+                                        "value": "more valuable"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "group",
+            "name": "concat_1_group",
+            "style": "cell",
+            "encode": {
+                "update": {
+                    "width": {
+                        "signal": "concat_1_width"
+                    },
+                    "height": {
+                        "signal": "concat_1_height"
+                    }
+                }
+            },
+            "marks": [
+                {
+                    "name": "concat_1_layer_0_marks",
+                    "type": "symbol",
+                    "style": [
+                        "circle",
+                        "measure"
+                    ],
+                    "from": {
+                        "data": "source_0"
+                    },
+                    "encode": {
+                        "update": {
+                            "fill": {
+                                "scale": "color",
+                                "field": "measure"
+                            },
+                            "x": {
+                                "signal": "concat_1_width",
+                                "mult": 0.5
+                            },
+                            "y": {
+                                "scale": "concat_1_y",
+                                "field": "measure"
+                            },
+                            "shape": {
+                                "value": "circle"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "concat_1_layer_1_marks",
+                    "type": "text",
+                    "style": [
+                        "text"
+                    ],
+                    "from": {
+                        "data": "source_0"
+                    },
+                    "encode": {
+                        "update": {
+                            "align": {
+                                "value": "left"
+                            },
+                            "baseline": {
+                                "value": "middle"
+                            },
+                            "dx": {
+                                "value": -22
+                            },
+                            "fontWeight": {
+                                "value": "bold"
+                            },
+                            "fill": {
+                                "value": "black"
+                            },
+                            "x": {
+                                "value": 45
+                            },
+                            "y": {
+                                "scale": "concat_1_y",
+                                "field": "measure"
+                            },
+                            "text": {
+                                "signal": "''+datum[\"measure\"]"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "concat_1_layer_2_marks",
+                    "type": "text",
+                    "style": [
+                        "text"
+                    ],
+                    "from": {
+                        "data": "source_0"
+                    },
+                    "encode": {
+                        "update": {
+                            "align": {
+                                "value": "left"
+                            },
+                            "baseline": {
+                                "value": "middle"
+                            },
+                            "dx": {
+                                "value": -22
+                            },
+                            "dy": {
+                                "value": 16
+                            },
+                            "fill": {
+                                "value": "black"
+                            },
+                            "x": {
+                                "value": 45
+                            },
+                            "y": {
+                                "scale": "concat_1_y",
+                                "field": "measure"
+                            },
+                            "text": {
+                                "signal": "''+datum[\"summary\"]"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "concat_1_layer_3_marks",
+                    "type": "text",
+                    "style": [
+                        "text"
+                    ],
+                    "from": {
+                        "data": "source_0"
+                    },
+                    "encode": {
+                        "update": {
+                            "align": {
+                                "value": "left"
+                            },
+                            "baseline": {
+                                "value": "middle"
+                            },
+                            "dx": {
+                                "value": -22
+                            },
+                            "dy": {
+                                "value": 30
+                            },
+                            "fill": {
+                                "value": "black"
+                            },
+                            "x": {
+                                "value": 45
+                            },
+                            "y": {
+                                "scale": "concat_1_y",
+                                "field": "measure"
+                            },
+                            "text": {
+                                "signal": "''+datum[\"summary2\"]"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "scales": [
+        {
+            "name": "color",
+            "type": "ordinal",
+            "domain": {
+                "fields": [
+                    {
+                        "data": "data_3",
+                        "field": "measure"
+                    },
+                    {
+                        "data": "source_0",
+                        "field": "measure"
+                    }
+                ],
+                "sort": true
+            },
+            "range": [
+                "black",
+                "white"
+            ]
+        },
+        {
+            "name": "concat_0_concat_0_x",
+            "type": "linear",
+            "domain": {
+                "fields": [
+                    {
+                        "data": "data_2",
+                        "field": "lo"
+                    },
+                    {
+                        "data": "data_2",
+                        "field": "hi"
+                    },
+                    [
+                        -3,
+                        3
+                    ]
+                ]
+            },
+            "range": [
+                0,
+                {
+                    "signal": "concat_0_width"
+                }
+            ],
+            "zero": false,
+            "nice": true
+        },
+        {
+            "name": "concat_0_concat_0_y",
+            "type": "point",
+            "domain": {
+                "fields": [
+                    {
+                        "data": "data_2",
+                        "field": "study"
+                    },
+                    {
+                        "data": "data_3",
+                        "field": "study"
+                    }
+                ],
+                "sort": true
+            },
+            "range": {
+                "step": {
+                    "signal": "concat_0_concat_0_y_step"
+                }
+            },
+            "padding": 0.5
+        },
+        {
+            "name": "concat_0_concat_1_x",
+            "type": "linear",
+            "domain": {
+                "fields": [
+                    {
+                        "data": "data_5",
+                        "field": "from"
+                    },
+                    {
+                        "data": "data_5",
+                        "field": "to"
+                    },
+                    {
+                        "data": "data_6",
+                        "field": "to"
+                    },
+                    {
+                        "data": "data_7",
+                        "field": "from"
+                    },
+                    {
+                        "data": "data_8",
+                        "field": "from"
+                    },
+                    {
+                        "data": "data_9",
+                        "field": "from"
+                    },
+                    {
+                        "data": "data_10",
+                        "field": "from"
+                    }
+                ]
+            },
+            "range": [
+                0,
+                {
+                    "signal": "concat_0_width"
+                }
+            ],
+            "zero": false,
+            "nice": true
+        },
+        {
+            "name": "concat_1_y",
+            "type": "point",
+            "domain": {
+                "data": "source_0",
+                "field": "measure",
+                "sort": true
+            },
+            "range": {
+                "step": {
+                    "signal": "concat_1_y_step"
+                }
+            },
+            "reverse": true,
+            "padding": 0.5
+        }
+    ],
+    "config": {
+        "axisY": {
+            "minExtent": 30
+        },
+        "style": {
+            "measure": {
+                "stroke": "black",
+                "opacity": 1
+            },
+            "arrow-label": {
+                "dy": 16,
+                "fontSize": 9.5
+            },
+            "arrow-label2": {
+                "dy": 28,
+                "fontSize": 9.5
+            },
+            "cell": {
+                "stroke": "transparent"
+            },
+            "group-title": {
+                "fontSize": 12
+            }
+        }
+    }
+}
