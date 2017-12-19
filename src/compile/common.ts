@@ -1,13 +1,16 @@
+import {keys} from 'd3';
 import {Channel, isScaleChannel} from '../channel';
 import {Config, ViewConfig} from '../config';
 import {FieldDef, FieldRefOption, isScaleFieldDef, isTimeFieldDef, OrderFieldDef, vgField} from '../fielddef';
+import {GuideEncodingEntry} from '../guide';
 import {MarkConfig, MarkDef, TextConfig} from '../mark';
 import {ScaleType} from '../scale';
 import {TimeUnit} from '../timeunit';
 import {formatExpression} from '../timeunit';
 import {QUANTITATIVE} from '../type';
 import {contains, isArray} from '../util';
-import {VgEncodeEntry, VgMarkConfig, VgSort} from '../vega.schema';
+import {VgEncodeChannel, VgEncodeEntry, VgMarkConfig, VgSort} from '../vega.schema';
+import {wrapCondition} from './mark/mixins';
 import {Explicit} from './split';
 import {UnitModel} from './unit';
 
@@ -182,4 +185,14 @@ export function binRequiresRange(fieldDef: FieldDef<string>, channel: Channel) {
   // We need the range only when the user explicitly forces a binned field to be use discrete scale. In this case, bin range is used in axis and legend labels.
   // We could check whether the axis or legend exists (not disabled) but that seems overkill.
   return isScaleChannel(channel) && contains(['ordinal', 'nominal'], fieldDef.type);
+}
+
+export function guideEncodeEntry(encoding: GuideEncodingEntry, model: UnitModel) {
+  return keys(encoding).reduce((encode, channel: VgEncodeChannel) => {
+    const valueDef = encoding[channel];
+    return {
+      ...encode,
+      ...wrapCondition(model, valueDef, channel, x => x)
+    };
+  }, {});
 }

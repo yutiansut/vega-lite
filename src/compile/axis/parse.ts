@@ -2,7 +2,7 @@ import {Axis, AXIS_PROPERTY_TYPE, AxisEncoding, isAxisProperty, VG_AXIS_PROPERTI
 import {POSITION_SCALE_CHANNELS, PositionScaleChannel} from '../../channel';
 import {keys, some} from '../../util';
 import {AxisOrient, VgAxis, VgAxisEncode} from '../../vega.schema';
-import {getSpecifiedOrDefaultValue, numberFormat, titleMerger} from '../common';
+import {getSpecifiedOrDefaultValue, guideEncodeEntry, numberFormat, titleMerger} from '../common';
 import {LayerModel} from '../layer';
 import {parseGuideResolve} from '../resolve';
 import {defaultTieBreaker, Explicit, mergeValuesWithExplicit} from '../split';
@@ -249,9 +249,11 @@ function parseAxis(channel: PositionScaleChannel, model: UnitModel, isGridAxis: 
       return e;
     }
 
+    const axisEncodingPart = guideEncodeEntry(axisEncoding[part], model);
+
     const value = part === 'labels' ?
-      encode.labels(model, channel, axisEncoding.labels || {}, axisComponent.get('orient')) :
-      axisEncoding[part] || {};
+      encode.labels(model, channel, axisEncodingPart, axisComponent.get('orient')) :
+      axisEncodingPart;
 
     if (value !== undefined && keys(value).length > 0) {
       e[part] = {update: value};

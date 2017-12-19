@@ -4,7 +4,7 @@ import {Legend, LEGEND_PROPERTIES, VG_LEGEND_PROPERTIES} from '../../legend';
 import {GEOJSON} from '../../type';
 import {deleteNestedProperty, keys} from '../../util';
 import {VgLegend, VgLegendEncode} from '../../vega.schema';
-import {getSpecifiedOrDefaultValue, numberFormat, titleMerger} from '../common';
+import {getSpecifiedOrDefaultValue, guideEncodeEntry, numberFormat, titleMerger} from '../common';
 import {isUnitModel, Model} from '../model';
 import {parseGuideResolve} from '../resolve';
 import {Explicit, makeImplicit} from '../split';
@@ -71,10 +71,11 @@ export function parseLegendForChannel(model: UnitModel, channel: NonPositionScal
   // 2) Add mark property definition groups
   const legendEncoding = legend.encoding || {};
   const legendEncode = ['labels', 'legend', 'title', 'symbols', 'gradient'].reduce((e: VgLegendEncode, part) => {
+    const legendEncodingPart = guideEncodeEntry(legendEncoding[part], model);
     const value = encode[part] ?
       // TODO: replace legendCmpt with type is sufficient
-      encode[part](fieldDef, legendEncoding[part], model, channel, legendCmpt.get('type')) : // apply rule
-      legendEncoding[part]; // no rule -- just default values
+      encode[part](fieldDef, legendEncodingPart, model, channel, legendCmpt.get('type')) : // apply rule
+      legendEncodingPart; // no rule -- just default values
     if (value !== undefined && keys(value).length > 0) {
       e[part] = {update: value};
     }
