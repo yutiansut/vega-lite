@@ -2,6 +2,7 @@ import {Config} from './../config';
 import {AnyMark, isMarkDef} from './../mark';
 import {GenericUnitSpec, LayerSpec} from './../spec';
 import {BOXPLOT, BOXPLOT_STYLES, BoxPlotConfigMixins, BoxPlotDef, normalizeBoxPlot, VL_ONLY_BOXPLOT_CONFIG_PROPERTY_INDEX} from './boxplot';
+import {CALLOUT, CalloutDef, normalizeCallout} from './callout';
 import {ERRORBAR, normalizeErrorBar} from './errorbar';
 
 
@@ -21,9 +22,9 @@ export function remove(mark: string) {
   delete normalizerRegistry[mark];
 }
 
-export type CompositeMark = BOXPLOT | ERRORBAR;
+export type CompositeMark = BOXPLOT | ERRORBAR | CALLOUT;
 
-export type CompositeMarkDef = BoxPlotDef;
+export type CompositeMarkDef = BoxPlotDef | CalloutDef;
 
 export type CompositeAggregate = BOXPLOT;
 
@@ -38,6 +39,7 @@ export const VL_ONLY_COMPOSITE_MARK_SPECIFIC_CONFIG_PROPERTY_INDEX = {
 
 add(BOXPLOT, normalizeBoxPlot);
 add(ERRORBAR, normalizeErrorBar);
+add(CALLOUT, normalizeCallout);
 
 /**
  * Transform a unit spec with composite mark into a normal layer spec.
