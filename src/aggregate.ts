@@ -28,7 +28,7 @@ const AGGREGATE_OP_INDEX: Flag<AggregateOp> = {
   min: 1,
   max: 1,
   argmin: 1,
-  argmax: 1
+  argmax: 1,
 };
 
 export const AGGREGATE_OPS = flagKeys(AGGREGATE_OP_INDEX);
