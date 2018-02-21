@@ -946,6 +946,7 @@ export type FontWeightString = 'normal' | 'bold';
  * @TJS-type integer
  * @minimum 100
  * @maximum 900
+ * @multipleOf 100
  */
 export type FontWeightNumber = number;
 export type FontWeight = FontWeightString | FontWeightNumber;
